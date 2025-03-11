@@ -1,3 +1,4 @@
+import ImageComponent from "@components/Image";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -8,11 +9,17 @@ function Movie(props) {
     data: { backdrop_path, title, release_date, overview },
   } = props;
   return (
-    <>
-      <img
+    <div>
+      <ImageComponent
+        src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+        className={"aspect-video w-full brightness-50"}
+        height={500}
+        width={900}
+      />
+      {/* <img
         src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
         className="aspect-video w-full brightness-50"
-      />
+      /> */}
       <div className="absolute bottom-[10%] left-8 w-1/2 sm:w-1/3">
         <p className="mb-2 font-bold sm:text-[2vw]">{title}</p>
         <div>
@@ -35,7 +42,7 @@ function Movie(props) {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

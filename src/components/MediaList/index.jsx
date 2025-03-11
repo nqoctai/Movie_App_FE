@@ -1,30 +1,18 @@
 import MovieCard from "@components/MovieCard";
-import React, { useEffect, useState } from "react";
+import useFetch from "@hooks/useFetch";
+
+import React, { useState } from "react";
 
 const MediaList = ({ title, tabs }) => {
-  const [mediaList, setMediaList] = useState([]);
+  // const [mediaList, setMediaList] = useState([]);
   const [activeTabId, setActiveTabId] = useState(tabs[0]?.id);
 
-  useEffect(() => {
-    const fetchPopularMovie = async () => {
-      const url = tabs.find((tab) => tab.id === activeTabId)?.url;
-      if (url) {
-        const res = await fetch(url, {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ODM3ZjEwZDk2MTljM2RmZjM1NDAxMTg3ZmIxODE1ZCIsIm5iZiI6MTc0MTUxNDczMS45NTYsInN1YiI6IjY3Y2Q2N2ViYWQ0ODZiNDNlYmUyYzQ5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9RBIMIS99wA3VWa1bApDpfC34VB0RH6vGmY2hxyJd-8`,
-          },
-        });
-        const data = await res.json();
-        console.log("check data>>>>", { data });
-        const trendingMediaList = data.results.slice(0, 12);
-        setMediaList(trendingMediaList);
-      }
-      // console.log("check>>>", popularMovies);
-    };
-    fetchPopularMovie();
-  }, [activeTabId, tabs]);
+  const url = tabs.find((tab) => tab.id === activeTabId)?.url;
+  const { data } = useFetch({
+    url,
+  });
+
+  const mediaList = (data.results || []).slice(0, 12);
 
   return (
     <div className="bg-black px-8 py-10 text-[1.2vw] text-white">

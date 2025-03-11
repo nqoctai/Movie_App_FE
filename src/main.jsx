@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage.jsx";
 
 import RootLayout from "./pages/RootLayout.jsx";
 import MovieDetail from "@pages/MovieDetail";
+import TVShowDetail from "@pages/TVShowDetail";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/movie/:id",
         element: <MovieDetail />,
+      },
+      {
+        path: "/tv/:id",
+        element: <TVShowDetail />,
       },
     ],
   },
